@@ -16,7 +16,7 @@ public class ViolationType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     public ViolationCode violationCode;
 
     @Column(nullable = false)

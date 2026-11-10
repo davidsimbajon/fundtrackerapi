@@ -21,7 +21,8 @@ public class ViolationRecord {
     @JoinColumn(name = "team_member", nullable = false)
     public TeamMember violator;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "violation_type", nullable = false)
     public ViolationType violationType;
 
     @Column(nullable = false)

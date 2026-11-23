@@ -1,5 +1,7 @@
 package com.pointwest.topaz.fundtrackerapi.model;
 
+import com.pointwest.topaz.fundtrackerapi.model.enums.MemberStatus;
+import com.pointwest.topaz.fundtrackerapi.model.enums.ModeOfPayment;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +25,10 @@ public class PaymentRecord {
 
     @Column(nullable = false)
     public double amountPaid;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    public ModeOfPayment modeOfPayment;
 
     @Column(nullable = false)
     public LocalDateTime paymentDate;

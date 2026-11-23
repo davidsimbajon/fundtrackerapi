@@ -7,8 +7,6 @@ public record CreateViolationRequest(
         Long memberId,
 
         @NotNull
-        Long violationTypeId,
-
-        String remarks
+        Long violationTypeId
 )
 {}

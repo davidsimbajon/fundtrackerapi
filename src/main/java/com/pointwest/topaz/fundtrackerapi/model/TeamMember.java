@@ -1,5 +1,7 @@
 package com.pointwest.topaz.fundtrackerapi.model;
 
+import com.pointwest.topaz.fundtrackerapi.model.enums.MemberStatus;
+import com.pointwest.topaz.fundtrackerapi.model.enums.Pod;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -19,7 +21,15 @@ public class TeamMember {
     @Column(nullable = false)
     public String name;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    public Pod pod;
+
     @ColumnDefault("0")
     public double outstandingBalance;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    public MemberStatus status;
 
 }

@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ViolationTypeMapper {
 
+    @Mapping(target = "id", source = "violationType.id")
     @Mapping(target = "code", source = "violationType.violationCode")
     ViolationTypeResponse toResponse(ViolationType violationType);
 

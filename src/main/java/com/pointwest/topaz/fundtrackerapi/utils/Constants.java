@@ -16,6 +16,7 @@ public class Constants {
     public static final String NO_EMAIL_SWAP = "No Email Swap";
     public static final String LATE_WHIZ = "Late Whiz";
     public static final String DTR_CORRECTION = "DTR Correction";
+    public static final String LATE_TI_TO = "Late Time In/Time Out";
 
     public static final String BUSINESS_RULE_VIOLATION = "Business Rule Violation";
     public static final String RESOURCE_NOT_FOUND = "Resource Not Found";

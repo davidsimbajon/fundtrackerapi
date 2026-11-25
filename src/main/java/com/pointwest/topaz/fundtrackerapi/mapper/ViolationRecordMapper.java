@@ -51,6 +51,7 @@ public interface ViolationRecordMapper {
             case NO_EMAIL_SWAP -> Constants.NO_EMAIL_SWAP;
             case LATE_WHIZ -> Constants.LATE_WHIZ;
             case DTR_CORRECTION -> Constants.DTR_CORRECTION;
+            case LATE_TI_TO -> Constants.LATE_TI_TO;
         };
     }
 

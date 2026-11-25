@@ -10,8 +10,10 @@ public record ViolationTypeResponse(
                 "NO_SHOW_DSU",
                 "NO_EMAIL_SWAP",
                 "LATE_WHIZ",
-                "DTR_CORRECTION"
+                "DTR_CORRECTION",
+                "LATE_TI_TO"
         })
-        String code
+        String code,
+        String description
 ) {
 }

@@ -6,8 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import java.time.LocalDateTime;
-
 public record CreatePaymentRequest(
         @NotNull
         @JsonAlias("teamMemberId")
@@ -19,10 +17,7 @@ public record CreatePaymentRequest(
 
         @NotNull
         @Positive
-        Double amountPaid,
-
-        @NotNull
-        LocalDateTime paymentDate
+        Double amountPaid
 ) {
     public Long teamMemberId() {
         return memberId;

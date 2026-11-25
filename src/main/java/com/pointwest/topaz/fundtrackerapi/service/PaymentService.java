@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -41,7 +42,7 @@ public class PaymentService {
                 .teamMember(member)
                 .amountPaid(request.amountPaid())
                 .modeOfPayment(request.modeOfPayment())
-                .paymentDate(request.paymentDate())
+                .paymentDate(getCurrentPaymentDate())
                 .build();
 
         PaymentRecord savedRecord = paymentRecordRepository.save(record);
@@ -70,6 +71,10 @@ public class PaymentService {
             throw new BusinessRuleViolationException(
                     com.pointwest.topaz.fundtrackerapi.utils.Constants.NEGATIVE_PAYMENT_AMOUNT_DETAIL);
         }
+    }
+
+    private LocalDateTime getCurrentPaymentDate() {
+        return LocalDateTime.now();
     }
 
     private void validatePaymentDoesNotExceedBalance(double amountPaid, double outstandingBalance) {

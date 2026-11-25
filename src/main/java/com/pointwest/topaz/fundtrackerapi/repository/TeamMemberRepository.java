@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,5 +24,6 @@ public interface TeamMemberRepository extends JpaRepository<TeamMember, Long> {
     void subtractBalance(@Param("memberId") Long memberId, @Param("amount") double amount);
 
     List<TeamMember> findByStatusNot(MemberStatus status);
+    Page<TeamMember> findByStatusNot(MemberStatus status, Pageable pageable);
     Optional<TeamMember> findByIdAndStatusNot(Long id, MemberStatus status);
 }

@@ -1,15 +1,18 @@
 package com.pointwest.topaz.fundtrackerapi.service;
 
 import com.pointwest.topaz.fundtrackerapi.dto.CreateMemberRequest;
+import com.pointwest.topaz.fundtrackerapi.dto.PaginatedResponse;
 import com.pointwest.topaz.fundtrackerapi.dto.TeamMemberResponse;
 import com.pointwest.topaz.fundtrackerapi.dto.UpdateMemberRequest;
+import com.pointwest.topaz.fundtrackerapi.exception.ResourceNotFoundException;
 import com.pointwest.topaz.fundtrackerapi.mapper.TeamMemberMapper;
 import com.pointwest.topaz.fundtrackerapi.model.TeamMember;
 import com.pointwest.topaz.fundtrackerapi.model.enums.MemberStatus;
 import com.pointwest.topaz.fundtrackerapi.repository.TeamMemberRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +31,22 @@ public class TeamMemberService {
         return teamMemberMapper.toResponse(teamMemberRepository.save(member));
     }
 
-    public List<TeamMemberResponse> getAllTeamMember() {
-        return teamMemberRepository.findByStatusNot(MemberStatus.DELETED)
+    public PaginatedResponse<TeamMemberResponse> getAllTeamMember(int page, int size) {
+        Page<TeamMember> memberPage = teamMemberRepository.findByStatusNot(
+                MemberStatus.DELETED,
+                PageRequest.of(page, size)
+        );
+        List<TeamMemberResponse> content = memberPage.getContent()
                 .stream()
                 .map(teamMemberMapper::toResponse)
                 .toList();
+
+        return new PaginatedResponse<>(
+                content,
+                memberPage.getNumber(),
+                memberPage.getTotalPages(),
+                memberPage.getSize()
+        );
     }
 
     public TeamMemberResponse getTeamMemberById(Long id) {
@@ -55,8 +69,9 @@ public class TeamMemberService {
 
     private TeamMember findActiveMember(Long id){
         return teamMemberRepository.findByIdAndStatusNot(id, MemberStatus.DELETED)
-                .orElseThrow(() ->
-                        new EntityNotFoundException("Team member not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        com.pointwest.topaz.fundtrackerapi.utils.Constants.TEAM_MEMBER_NOT_FOUND_DETAIL,
+                        "Team member ID: " + id));
     }
 
 }

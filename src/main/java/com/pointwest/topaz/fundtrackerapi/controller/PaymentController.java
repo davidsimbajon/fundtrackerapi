@@ -37,7 +37,8 @@ public class PaymentController {
             summary = "Log a payment",
             description = "Records a payment against an active team member and reduces that member's "
                     + "outstanding balance by the amount paid. "
-                    + "The payment must be positive and cannot exceed the member's outstanding balance."
+                    + "The payment must be positive and cannot exceed the member's outstanding balance. "
+                    + "The payment date and time are set by the backend to the current time."
     )
     @ApiResponses({
             @ApiResponse(

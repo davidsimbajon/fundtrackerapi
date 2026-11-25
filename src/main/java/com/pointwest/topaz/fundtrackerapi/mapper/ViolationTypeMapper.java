@@ -10,6 +10,7 @@ public interface ViolationTypeMapper {
 
     @Mapping(target = "id", source = "violationType.id")
     @Mapping(target = "code", source = "violationType.violationCode")
+    @Mapping(target = "description", source = "violationType.description")
     ViolationTypeResponse toResponse(ViolationType violationType);
 
 }
